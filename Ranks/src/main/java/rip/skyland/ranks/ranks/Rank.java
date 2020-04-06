@@ -17,10 +17,11 @@ import java.util.UUID;
 @Setter
 public class Rank extends SimpleJsonSerialization {
 
+    private final RankModule rankModule = CommonsPlugin.getInstance().getHandler().findModule(RankModule.class);
+
     private final UUID uuid;
     private final String rankName;
     private final List<String> permissions = new ArrayList<>();
-    private final RankModule rankModule = CommonsPlugin.getInstance().getHandler().findModule(RankModule.class);
 
     private ChatColor color = ChatColor.WHITE;
 

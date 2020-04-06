@@ -51,12 +51,29 @@ public class RankEditValueProcedure extends ChatProcedure {
             break;
 
             case COLOR: {
-                rank.setColor(ChatColor.valueOf(result));
+                try {
+                    rank.setColor(ChatColor.valueOf(result));
+                } catch (Exception exception) {
+                    player.sendMessage(ChatColor.RED + result + " is not a boolean.");
+                }
             }
             break;
 
             case STAFF_RANK: {
-                rank.setStaffRank(Boolean.parseBoolean(result));
+                try {
+                    rank.setStaffRank(Boolean.parseBoolean(result));
+                } catch (Exception exception) {
+                    player.sendMessage(ChatColor.RED + result + " is not a boolean.");
+                }
+            }
+            break;
+
+            case DEFAULT_RANK: {
+                try {
+                    rank.setDefaultRank(Boolean.parseBoolean(result));
+                } catch (Exception exception) {
+                    player.sendMessage(ChatColor.RED + result + " is not a boolean.");
+                }
             }
             break;
         }

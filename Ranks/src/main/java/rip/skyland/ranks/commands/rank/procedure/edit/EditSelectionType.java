@@ -7,5 +7,6 @@ public enum EditSelectionType {
     DISPLAY_NAME,
     COLOR,
     STAFF_RANK,
+    DEFAULT_RANK
 
 }
