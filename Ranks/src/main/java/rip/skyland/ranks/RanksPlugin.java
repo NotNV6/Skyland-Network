@@ -33,18 +33,21 @@ public class RanksPlugin extends JavaPlugin {
 
         final ModuleRegistrar moduleRegistrar = CommonsPlugin.getInstance().getHandler();
         final PlayerDataModule playerDataModule = moduleRegistrar.findModule(PlayerDataModule.class);
+        final ChatModule chatModule = new ChatModule(new DefaultChatFormat());
 
         // register modules
         moduleRegistrar.registerModule(new GrantModule());
         moduleRegistrar.registerModule(new RankModule());
 
         // chat module
-        final ChatModule chatModule = new ChatModule(new DefaultChatFormat());
         moduleRegistrar.registerModule(chatModule);
         chatModule.setChatHandler(new SimpleChatHandler());
 
         // register player data
-        playerDataModule.getRegisteredData().addAll(Arrays.asList(new GrantData(null), new PermissionData()));
+        playerDataModule.getRegisteredData().addAll(Arrays.asList(
+                new GrantData(null),
+                new PermissionData())
+        );
 
         // register listeners
         Bukkit.getPluginManager().registerEvents(new DataRegisterListener(), this);
@@ -54,6 +57,10 @@ public class RanksPlugin extends JavaPlugin {
         final CommandModule commandModule = moduleRegistrar.findModule(CommandModule.class);
 
         commandModule.getTypeAdapters().add(new RankTypeAdapter());
-        commandModule.registerCommand(new RankCommand(), new GrantCommand(), new GrantsCommand());
+        commandModule.registerCommand(
+                new RankCommand(),
+                new GrantCommand(),
+                new GrantsCommand()
+        );
     }
 }

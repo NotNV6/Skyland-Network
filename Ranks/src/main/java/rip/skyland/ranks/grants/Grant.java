@@ -26,6 +26,7 @@ public class Grant extends SimpleJsonSerialization {
 
     private long startTime;
     private long endTime = -1L;
+    private long expirationTime = -1L;
 
     private boolean active = true;
 
@@ -72,6 +73,21 @@ public class Grant extends SimpleJsonSerialization {
                 .addProperty("active", active)
                 .addProperty("startTime", startTime)
                 .addProperty("endTime", endTime).get();
+    }
+
+    /**
+     * Set whether a grant is active.
+     *
+     * @param active whether it's active
+     */
+    public void setActive(boolean active) {
+        if(!active) {
+            this.expirationTime = System.currentTimeMillis();
+        } else {
+            this.expirationTime = -1L;
+        }
+
+        this.active = active;
     }
 
     public int getWeight() {

@@ -8,6 +8,7 @@ import rip.skyland.commons.module.Module;
 import rip.skyland.plugin.PluginHandlerPlugin;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,7 +63,7 @@ public class PluginModule extends Module {
      */
     @SneakyThrows
     public void disablePlugin(Plugin plugin) {
-        if(plugin.getName().equals(JavaPlugin.getPlugin(PluginHandlerPlugin.class).getName())) {
+        if (plugin.getName().equals(JavaPlugin.getPlugin(PluginHandlerPlugin.class).getName())) {
             return;
         }
 
@@ -70,10 +71,28 @@ public class PluginModule extends Module {
                 .filter(plugin1 -> plugin1.getDescription().getDepend().stream().anyMatch(string -> string.equals(plugin.getName())))
                 .collect(Collectors.toList());
 
-        if(!dependentPlugins.isEmpty()) {
+        if (!dependentPlugins.isEmpty()) {
             dependentPlugins.forEach(this::disablePlugin);
         }
 
         Bukkit.getPluginManager().disablePlugin(plugin);
+    }
+
+    /**
+     * Find all plugins which have a relation to a plugin
+     *
+     * @param plugin the plugin to check
+     * @return the related plugins
+     */
+    public List<Plugin> findRelatedPlugins(Plugin plugin) {
+        return Arrays.stream(Bukkit.getPluginManager().getPlugins())
+                .filter(plugin1 -> {
+                    final List<String> depend = new ArrayList<>();
+                    depend.addAll(plugin1.getDescription().getDepend());
+                    depend.addAll(plugin1.getDescription().getSoftDepend());
+
+                    return depend.stream().anyMatch(string -> plugin.getName().equals(string));
+                }).collect(Collectors.toList());
+
     }
 }

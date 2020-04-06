@@ -17,11 +17,9 @@ import rip.skyland.commons.util.json.JsonUtil;
 import rip.skyland.ranks.grants.Grant;
 import rip.skyland.ranks.player.GrantData;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -96,6 +94,11 @@ public class RankModule extends Module {
 
             grantData.getGrants().sort(grantComparator);
         });
+    }
+
+    public Stream<Rank> findDefaultRank() {
+        return this.ranks.stream()
+                .filter(Rank::isDefaultRank);
     }
 
     /**

@@ -29,6 +29,12 @@ public class GrantData extends Data {
         this.playerData = playerData;
     }
 
+    /**
+     * Add a grant to the Grant array list
+     *
+     * @param grant the grant to remove
+     * @return the grant object
+     */
     public Grant addGrant(Grant grant) {
         this.grants.add(grant);
         this.grants.sort(CommonsPlugin.getInstance().getHandler().findModule(RankModule.class).getGrantComparator());
@@ -43,6 +49,12 @@ public class GrantData extends Data {
         return grant;
     }
 
+    /**
+     * Remove a grant from the Grant array list
+     *
+     * @param grant the grant to remove
+     * @return the grant object
+     */
     public Grant removeGrant(Grant grant) {
         this.grants.remove(grant);
         this.grants.sort(CommonsPlugin.getInstance().getHandler().findModule(RankModule.class).getGrantComparator());
@@ -56,10 +68,21 @@ public class GrantData extends Data {
         return grant;
     }
 
+    /**
+     * Get the current rank of the player
+     *
+     * @return the current active rank, or the default rank.
+     */
     public Rank getRank() {
-        return grants.stream()
+        Rank rank = grants.stream()
                 .filter(Grant::isActive)
                 .findFirst().orElse(null).getRank();
+
+        if (rank == null) {
+            rank = CommonsPlugin.getInstance().getHandler().findModule(RankModule.class).findDefaultRank().findFirst().orElse(null);
+        }
+
+        return rank;
     }
 
     @Override
@@ -77,7 +100,7 @@ public class GrantData extends Data {
     public Data fromJson(JsonObject object) {
         final JsonArray array = MongoAPI.get().getParser().parse(object.get("grants").getAsString()).getAsJsonArray();
 
-       array.forEach(element -> grants.add(new Grant(element.getAsJsonObject())));
+        array.forEach(element -> grants.add(new Grant(element.getAsJsonObject())));
 
         return this;
     }

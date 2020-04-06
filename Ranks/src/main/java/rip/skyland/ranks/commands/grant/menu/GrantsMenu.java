@@ -43,15 +43,20 @@ public class GrantsMenu extends PaginatedMenu {
             final ZonedDateTime dateTime = Instant.ofEpochMilli(grant.getStartTime())
                     .atZone(ZoneId.of("America/New_York"));
 
-            buttons.add(new Button(i, Material.WOOL, grant.getRank().getDisplayName() + ChatColor.WHITE + " #0",
-                    Arrays.asList(
-                            "",
-                            "&bReason: &f" + grant.getReason(),
-                            "&bIssued on: &f" + grant.getServer(),
-                            "",
-                            "&bIssue date: &f" + dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                            "&bExpires in: &f" + (grant.getEndTime() == -1L ? "Never" : TimeUtils.formatWords(grant.getEndTime() - System.currentTimeMillis()))
-                    ), WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
+            final List<String> lore = new ArrayList<>(Arrays.asList(
+                    "",
+                    "&bRank: &f" + grant.getRank().getDisplayName(),
+                    "&bReason: &f" + grant.getReason(),
+                    "&bIssued on: &f" + grant.getServer(),
+                    "",
+                    "&bExpires in: &f" + (!grant.isActive() ? "Expired" : grant.getEndTime() == -1L ? "Never" : TimeUtils.formatWords(grant.getEndTime() - System.currentTimeMillis()))
+            ));
+
+            if (!grant.isActive()) {
+                lore.add("&bExpired at: &f" + Instant.ofEpochMilli(grant.getExpirationTime()).atZone(ZoneId.of("America/New_York")).format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")));
+            }
+
+            buttons.add(new Button(i, Material.WOOL, "&b" + dateTime.format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")), lore, WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
                 grant.setActive(!grant.isActive());
 
                 player.sendMessage(ChatColor.AQUA + "You have changed the activity of grant " + CC.translate(grant.getRank().getDisplayName()) + ChatColor.WHITE + " #0");

@@ -28,23 +28,11 @@ public class DefaultChatFormat implements ChatFormat {
         final GrantData grantData = playerData.findData(GrantData.class);
         final StringBuilder format = new StringBuilder();
 
-        final List<FormatAddition> additionsBeforePrefix = formatAdditions.stream()
-                .filter(addition -> addition.getPosition().equals(FormatAddition.AdditionPosition.BEFORE_PREFIX))
-                .collect(Collectors.toList());
-
-        final List<FormatAddition> additionsAfterPrefix = formatAdditions.stream()
-                .filter(addition -> addition.getPosition().equals(FormatAddition.AdditionPosition.AFTER_PREFIX))
-                .collect(Collectors.toList());
-
-        final List<FormatAddition> additionsAfterName = formatAdditions.stream()
-                .filter(addition -> addition.getPosition().equals(FormatAddition.AdditionPosition.AFTER_NAME))
-                .collect(Collectors.toList());
-
-        additionsBeforePrefix.forEach(addition -> format.append(addition.getAddition()));
+        findFormatAdditions(FormatAddition.AdditionPosition.BEFORE_PREFIX).forEach(addition -> format.append(addition.getAddition()));
         format.append(CC.translate(grantData.getRank().getPrefix()));
-        additionsAfterPrefix.forEach(addition -> format.append(addition.getAddition()));
+        findFormatAdditions(FormatAddition.AdditionPosition.AFTER_PREFIX).forEach(addition -> format.append(addition.getAddition()));
         format.append(CC.translate(ChatColor.getLastColors(grantData.getRank().getPrefix()) + player.getName()));
-        additionsAfterName.forEach(addition -> format.append(addition.getAddition()));
+        findFormatAdditions(FormatAddition.AdditionPosition.AFTER_NAME).forEach(addition -> format.append(addition.getAddition()));
 
         format.append(ChatColor.GRAY)
                 .append(": ")
@@ -63,5 +51,17 @@ public class DefaultChatFormat implements ChatFormat {
         this.formatAdditions.add(formatAddition);
 
         return this;
+    }
+
+    /**
+     * Find the format additions by position.
+     *
+     * @param position the position
+     * @return the format additions.
+     */
+    public List<FormatAddition> findFormatAdditions(FormatAddition.AdditionPosition position) {
+        return formatAdditions.stream()
+                .filter(addition -> addition.getPosition().equals(position))
+                .collect(Collectors.toList());
     }
 }
