@@ -25,7 +25,7 @@ public class Rank extends SimpleJsonSerialization {
 
     private ChatColor color = ChatColor.WHITE;
 
-    private String displayName;
+    private String displayName = "";
     private String prefix = "";
 
     private int weight = 0;

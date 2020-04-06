@@ -13,6 +13,7 @@
         <module>Commons</module>
         <module>Ranks</module>
         <module>PluginHandler</module>
+        <module>Essentials</module>
     </modules>
 
     <build>
