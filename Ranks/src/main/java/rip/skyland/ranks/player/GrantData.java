@@ -16,6 +16,7 @@ import rip.skyland.ranks.ranks.RankModule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = true)
@@ -74,12 +75,16 @@ public class GrantData extends Data {
      * @return the current active rank, or the default rank.
      */
     public Rank getRank() {
-        Rank rank = grants.stream()
+        final Optional<Grant> grant = grants.stream()
                 .filter(Grant::isActive)
-                .findFirst().orElse(null).getRank();
+                .findFirst();
 
-        if (rank == null) {
+        final Rank rank;
+
+        if (!grant.isPresent()) {
             rank = CommonsPlugin.getInstance().getHandler().findModule(RankModule.class).findDefaultRank().findFirst().orElse(null);
+        } else {
+            rank = grant.get().getRank();
         }
 
         return rank;

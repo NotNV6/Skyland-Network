@@ -59,7 +59,7 @@ public class GrantsMenu extends PaginatedMenu {
             buttons.add(new Button(i, Material.WOOL, "&b" + dateTime.format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")), lore, WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
                 grant.setActive(!grant.isActive());
 
-                player.sendMessage(ChatColor.AQUA + "You have changed the activity of grant " + CC.translate(grant.getRank().getDisplayName()) + ChatColor.WHITE + " #0");
+                player.sendMessage(ChatColor.AQUA + "You have changed the activity of a grant");
 
                 player.closeInventory();
             }));
