@@ -15,3 +15,4 @@ public class StaffChatCommand {
                 .addProperty("server", "server").get());
     }
 }
+
