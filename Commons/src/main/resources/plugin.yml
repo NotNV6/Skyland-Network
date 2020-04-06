@@ -1,0 +1,7 @@
+name: Commons
+description: Simple commons plugin/library for Skyland.RIP
+main: rip.skyland.commons.CommonsPlugin
+
+website: 'skyland.rip'
+version: '1.0-SNAPSHOT'
+author: 'NV6'

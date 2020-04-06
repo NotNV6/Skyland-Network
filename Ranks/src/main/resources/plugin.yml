@@ -1,0 +1,10 @@
+name: Arxidia
+description: Simple ranks/grants plugin for Skyland.RIP
+main: rip.skyland.ranks.RanksPlugin
+
+website: 'skyland.rip'
+version: '1.0-SNAPSHOT'
+author: 'NV6'
+
+depend:
+  - Commons

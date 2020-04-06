@@ -1,0 +1,10 @@
+name: Karekla
+description: Simple plugin handler plugin for Skyland.RIP
+main: rip.skyland.plugin.PluginHandlerPlugin
+
+website: 'skyland.rip'
+version: '1.0-SNAPSHOT'
+author: 'NV6'
+
+depend:
+  - Commons
