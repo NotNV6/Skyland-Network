@@ -10,6 +10,7 @@ import rip.skyland.commons.player.PlayerDataModule;
 import rip.skyland.ranks.chat.ChatModule;
 import rip.skyland.ranks.chat.format.impl.DefaultChatFormat;
 import rip.skyland.ranks.chat.impl.SimpleChatHandler;
+import rip.skyland.ranks.commands.ListCommand;
 import rip.skyland.ranks.commands.grant.GrantCommand;
 import rip.skyland.ranks.commands.grant.GrantsCommand;
 import rip.skyland.ranks.commands.rank.RankCommand;
@@ -60,7 +61,8 @@ public class RanksPlugin extends JavaPlugin {
         commandModule.registerCommand(
                 new RankCommand(),
                 new GrantCommand(),
-                new GrantsCommand()
+                new GrantsCommand(),
+                new ListCommand()
         );
     }
 }
