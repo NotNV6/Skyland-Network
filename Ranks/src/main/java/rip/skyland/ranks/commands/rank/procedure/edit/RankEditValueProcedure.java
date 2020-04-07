@@ -24,7 +24,7 @@ public class RankEditValueProcedure extends ChatProcedure {
     public void start() {
         super.start();
 
-        player.sendMessage(ChatColor.AQUA + "Please select the value you want to give to the " + ChatColor.WHITE + type.name().toLowerCase() + ChatColor.AQUA + " type.");
+        player.sendMessage(ChatColor.AQUA + "Please type the value you want to give to the " + ChatColor.WHITE + type.name().toLowerCase() + ChatColor.AQUA + " type.");
     }
 
     @Override

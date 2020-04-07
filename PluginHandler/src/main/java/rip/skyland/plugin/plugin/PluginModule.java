@@ -67,12 +67,8 @@ public class PluginModule extends Module {
             return;
         }
 
-        final List<Plugin> dependentPlugins = Arrays.stream(Bukkit.getPluginManager().getPlugins())
-                .filter(plugin1 -> plugin1.getDescription().getDepend().stream().anyMatch(string -> string.equals(plugin.getName())))
-                .collect(Collectors.toList());
-
-        if (!dependentPlugins.isEmpty()) {
-            dependentPlugins.forEach(this::disablePlugin);
+        if (!this.findRelatedPlugins(plugin).isEmpty()) {
+            this.findRelatedPlugins(plugin).forEach(this::disablePlugin);
         }
 
         Bukkit.getPluginManager().disablePlugin(plugin);

@@ -1,0 +1,10 @@
+name: Essentials
+description: Simple essentials plugin for Skyland.RIP
+main: rip.skyland.essentials.EssentialsPlugin
+
+website: 'skyland.rip'
+version: '1.0-SNAPSHOT'
+author: 'NV6'
+
+depend:
+  - Commons

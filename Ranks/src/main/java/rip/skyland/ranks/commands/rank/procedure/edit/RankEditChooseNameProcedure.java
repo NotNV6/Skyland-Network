@@ -19,7 +19,7 @@ public class RankEditChooseNameProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please select a rank you want to edit.");
+        player.sendMessage(ChatColor.AQUA + "Please type the rank name of the rank you want to edit.");
     }
 
     @Override

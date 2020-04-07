@@ -5,8 +5,6 @@ import org.bukkit.ChatColor;
 import rip.skyland.commons.util.CC;
 import rip.skyland.essentials.redis.StaffRedisHandler;
 
-import java.util.Arrays;
-
 public class RequestRedisHandler extends StaffRedisHandler {
 
 
@@ -16,19 +14,14 @@ public class RequestRedisHandler extends StaffRedisHandler {
         final String reason = object.get("reason").getAsString();
 
         if (channel.equals("request")) {
-            Arrays.stream(new String[]{
-                    ChatColor.AQUA + "[Request] " + ChatColor.WHITE + CC.translate(reporter) + ChatColor.AQUA + " has requested assistance",
-                    ChatColor.AQUA + "  Reason: " + ChatColor.WHITE + reason
-            }).forEach(this::broadcastMessage);
+            this.broadcastMessage(ChatColor.AQUA + "[Request] " + ChatColor.WHITE + CC.translate(reporter) + ChatColor.AQUA + " has requested assistance");
+            this.broadcastMessage(ChatColor.AQUA + "  Reason: " + ChatColor.WHITE + reason);
         } else if (channel.equals("report")) {
             final String reported = object.get("reported").getAsString();
 
-            Arrays.stream(new String[]{
-                    ChatColor.AQUA + "[Report] " + ChatColor.WHITE + CC.translate(reporter) + ChatColor.AQUA + " has reported " + ChatColor.WHITE + CC.translate(reported),
-                    ChatColor.AQUA + "  Reason: " + ChatColor.WHITE + reason
-            }).forEach(this::broadcastMessage);
+            this.broadcastMessage(ChatColor.AQUA + "[Report] " + ChatColor.WHITE + CC.translate(reporter) + ChatColor.AQUA + " has reported " + ChatColor.WHITE + CC.translate(reported));
+            this.broadcastMessage(ChatColor.AQUA + "  Reason: " + ChatColor.WHITE + reason);
         }
-
     }
 
     @Override

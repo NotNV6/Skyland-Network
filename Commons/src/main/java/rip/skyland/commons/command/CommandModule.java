@@ -35,7 +35,7 @@ public class CommandModule extends Module {
         instance = this;
 
         this.fallbackPrefix = fallbackPrefix;
-        this.typeAdapters.addAll(Arrays.asList(new UUIDTypeAdapter(), new LongTypeAdapter(), new IntegerTypeAdapter(), new PlayerDataTypeAdapter()));
+        this.typeAdapters.addAll(Arrays.asList(new UUIDTypeAdapter(), new LongTypeAdapter(), new IntegerTypeAdapter(), new PlayerDataTypeAdapter(), new PlayerDataTypeAdapter()));
     }
 
     public void registerCommand(Object... objects) {

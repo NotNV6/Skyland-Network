@@ -24,7 +24,7 @@ public class RankEditSelectionProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please select the type you want to edit: " +
+        player.sendMessage(ChatColor.AQUA + "Please type the type you want to edit: " +
                 ChatColor.WHITE + Arrays.stream(EditSelectionType.values())
                 .map(Enum::name)
                 .map(String::toLowerCase)

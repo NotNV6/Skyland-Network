@@ -20,12 +20,13 @@ public class DefaultChatFormat implements ChatFormat {
 
     private final List<FormatAddition> formatAdditions = new ArrayList<>();
 
-
     @Override
     public String format(Player player, String message) {
         final PlayerDataModule playerDataModule = CommonsPlugin.getInstance().getHandler().findModule(PlayerDataModule.class);
+
         final PlayerData playerData = playerDataModule.findPlayerData(player.getUniqueId());
         final GrantData grantData = playerData.findData(GrantData.class);
+
         final StringBuilder format = new StringBuilder();
 
         findFormatAdditions(FormatAddition.AdditionPosition.BEFORE_PREFIX).forEach(addition -> format.append(addition.getAddition()));
@@ -49,6 +50,18 @@ public class DefaultChatFormat implements ChatFormat {
      */
     public DefaultChatFormat add(FormatAddition formatAddition) {
         this.formatAdditions.add(formatAddition);
+
+        return this;
+    }
+
+    /**
+     * Add a FormatAddition
+     *
+     * @param addition the addition
+     * @param position the position of the addition
+     */
+    public DefaultChatFormat add(String addition, FormatAddition.AdditionPosition position) {
+        this.add(new FormatAddition(addition, position));
 
         return this;
     }

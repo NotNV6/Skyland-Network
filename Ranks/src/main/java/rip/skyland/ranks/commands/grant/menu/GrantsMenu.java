@@ -56,6 +56,8 @@ public class GrantsMenu extends PaginatedMenu {
                 lore.add("&bExpired at: &f" + Instant.ofEpochMilli(grant.getExpirationTime()).atZone(ZoneId.of("America/New_York")).format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")));
             }
 
+            lore.add("");
+
             buttons.add(new Button(i, Material.WOOL, "&b" + dateTime.format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")), lore, WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
                 grant.setActive(!grant.isActive());
 
