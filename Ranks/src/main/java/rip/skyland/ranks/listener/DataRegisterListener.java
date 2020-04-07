@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.player.PlayerData;
 import rip.skyland.commons.player.PlayerDataModule;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.grants.Grant;
 import rip.skyland.ranks.player.GrantData;
 import rip.skyland.ranks.player.PermissionData;
@@ -50,7 +51,7 @@ public class DataRegisterListener implements Listener {
             PermissionUtil.updatePermissions(player);
 
             if (!playerData.isNewProfile() && !player.getName().equals(playerData.getName())) {
-                player.sendMessage(ChatColor.AQUA + "You have joined with a new name " + ChatColor.WHITE + "(" + player.getName() + ") " + ChatColor.AQUA + "formerly known as " + ChatColor.WHITE + playerData.getName());
+                player.sendMessage(Locale.PRIMARY_COLOR + "You have joined with a new name " + Locale.SECONDARY_COLOR + "(" + player.getName() + ") " + Locale.PRIMARY_COLOR + "formerly known as " + Locale.SECONDARY_COLOR + playerData.getName());
                 playerData.setName(player.getName());
             }
         }

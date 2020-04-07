@@ -7,6 +7,7 @@ import rip.skyland.commons.menu.button.Button;
 import rip.skyland.commons.menu.pagination.PaginatedMenu;
 import rip.skyland.commons.player.PlayerData;
 import rip.skyland.commons.util.CC;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.commons.util.TimeUtils;
 import rip.skyland.commons.util.WoolColor;
 import rip.skyland.ranks.grants.Grant;
@@ -45,23 +46,23 @@ public class GrantsMenu extends PaginatedMenu {
 
             final List<String> lore = new ArrayList<>(Arrays.asList(
                     "",
-                    "&bRank: &f" + grant.getRank().getDisplayName(),
-                    "&bReason: &f" + grant.getReason(),
-                    "&bIssued on: &f" + grant.getServer(),
+                    Locale.PRIMARY_COLOR + "Rank: " + Locale.SECONDARY_COLOR + grant.getRank().getDisplayName(),
+                    Locale.PRIMARY_COLOR + "Reason: " + Locale.SECONDARY_COLOR + grant.getReason(),
+                    Locale.PRIMARY_COLOR + "Issued on: " + Locale.SECONDARY_COLOR + grant.getServer(),
                     "",
-                    "&bExpires in: &f" + (!grant.isActive() ? "Expired" : grant.getEndTime() == -1L ? "Never" : TimeUtils.formatWords(grant.getEndTime() - System.currentTimeMillis()))
+                    Locale.PRIMARY_COLOR + "Expires in: " + Locale.SECONDARY_COLOR + (!grant.isActive() ? "Expired" : grant.getEndTime() == -1L ? "Never" : TimeUtils.formatWords(grant.getEndTime() - System.currentTimeMillis()))
             ));
 
             if (!grant.isActive()) {
-                lore.add("&bExpired at: &f" + Instant.ofEpochMilli(grant.getExpirationTime()).atZone(ZoneId.of("America/New_York")).format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")));
+                lore.add(Locale.PRIMARY_COLOR + "Expired at: &f" + Instant.ofEpochMilli(grant.getExpirationTime()).atZone(ZoneId.of("America/New_York")).format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")));
             }
 
             lore.add("");
 
-            buttons.add(new Button(i, Material.WOOL, "&b" + dateTime.format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")), lore, WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
+            buttons.add(new Button(i, Material.WOOL, Locale.PRIMARY_COLOR + dateTime.format(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss")), lore, WoolColor.getWoolColor(grant.getRank().getColor()), player -> {
                 grant.setActive(!grant.isActive());
 
-                player.sendMessage(ChatColor.AQUA + "You have changed the activity of a grant");
+                player.sendMessage(Locale.PRIMARY_COLOR + "You have changed the activity of a grant");
 
                 player.closeInventory();
             }));

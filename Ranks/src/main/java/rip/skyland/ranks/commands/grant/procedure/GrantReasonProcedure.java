@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.player.PlayerData;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.ranks.Rank;
 
 public class GrantReasonProcedure extends ChatProcedure {
@@ -23,7 +24,7 @@ public class GrantReasonProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please type a reason for the grant.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please type a reason for the grant.");
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.ranks.Rank;
 import rip.skyland.ranks.ranks.RankModule;
 
@@ -19,7 +20,7 @@ public class RankEditChooseNameProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please type the rank name of the rank you want to edit.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please type the rank name of the rank you want to edit.");
     }
 
     @Override

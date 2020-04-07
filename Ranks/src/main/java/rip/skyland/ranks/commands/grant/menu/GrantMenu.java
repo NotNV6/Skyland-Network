@@ -7,6 +7,7 @@ import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.menu.button.Button;
 import rip.skyland.commons.menu.pagination.PaginatedMenu;
 import rip.skyland.commons.player.PlayerData;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.commons.util.WoolColor;
 import rip.skyland.ranks.commands.grant.procedure.GrantReasonProcedure;
 import rip.skyland.ranks.ranks.Rank;
@@ -40,10 +41,10 @@ public class GrantMenu extends PaginatedMenu {
         for (int i = 0; i < rankModule.getRanks().size(); i++) {
             final Rank rank = rankModule.getRanks().get(i);
 
-            buttons.add(new Button(i, Material.WOOL, (rank.isDefaultRank() ? "&b[Default] " : rank.isStaffRank() ? "&b[Staff] " : "") + rank.getDisplayName(),
+            buttons.add(new Button(i, Material.WOOL, Locale.PRIMARY_COLOR + (rank.isDefaultRank() ? "[Default] " : rank.isStaffRank() ? "[Staff] " : "") + rank.getDisplayName(),
                     Arrays.asList(
                             "",
-                            "&bClick to grant this rank to " + target.getName(),
+                            Locale.PRIMARY_COLOR + "Click to grant this rank to " + (target.getPlayer() == null ? target.getName() : target.getPlayer().getDisplayName()),
                             ""
                     ), WoolColor.getWoolColor(rank.getColor()), player -> {
 

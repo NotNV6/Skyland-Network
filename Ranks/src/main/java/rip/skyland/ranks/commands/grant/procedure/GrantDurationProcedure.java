@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.player.PlayerData;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.commons.util.TimeUtils;
 import rip.skyland.ranks.grants.Grant;
 import rip.skyland.ranks.player.GrantData;
@@ -28,7 +29,7 @@ public class GrantDurationProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please type the duration the grant has to last." + ChatColor.WHITE + " (type perm or permanent for a permanent grant)");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please type the duration the grant has to last." + Locale.SECONDARY_COLOR + " (type perm or permanent for a permanent grant)");
     }
 
     @Override

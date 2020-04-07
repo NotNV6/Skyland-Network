@@ -3,6 +3,7 @@ package rip.skyland.ranks.commands.rank.procedure.edit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.ranks.Rank;
 
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class RankEditSelectionProcedure extends ChatProcedure {
     @Override
     public void start() {
         super.start();
-        player.sendMessage(ChatColor.AQUA + "Please type the type you want to edit: " +
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please type the type you want to edit: " +
                 ChatColor.WHITE + Arrays.stream(EditSelectionType.values())
                 .map(Enum::name)
                 .map(String::toLowerCase)

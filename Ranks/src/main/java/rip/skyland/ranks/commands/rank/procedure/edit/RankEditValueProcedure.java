@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.procedure.ChatProcedure;
 import rip.skyland.commons.util.CC;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.ranks.Rank;
 
 public class RankEditValueProcedure extends ChatProcedure {
@@ -24,7 +25,7 @@ public class RankEditValueProcedure extends ChatProcedure {
     public void start() {
         super.start();
 
-        player.sendMessage(ChatColor.AQUA + "Please type the value you want to give to the " + ChatColor.WHITE + type.name().toLowerCase() + ChatColor.AQUA + " type.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please type the value you want to give to the " + Locale.SECONDARY_COLOR + type.name().toLowerCase() + Locale.PRIMARY_COLOR + " type.");
     }
 
     @Override
@@ -79,6 +80,6 @@ public class RankEditValueProcedure extends ChatProcedure {
         }
 
         super.finish(result);
-        player.sendMessage(ChatColor.AQUA + "You have set the " + ChatColor.WHITE + type.name().toLowerCase() + ChatColor.AQUA + " value to " + ChatColor.WHITE + CC.translate(result));
+        player.sendMessage(Locale.PRIMARY_COLOR + "You have set the " + Locale.SECONDARY_COLOR + type.name().toLowerCase() + Locale.PRIMARY_COLOR + " value to " + Locale.SECONDARY_COLOR + CC.translate(result));
     }
 }

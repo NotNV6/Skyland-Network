@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.ranks.ranks.Rank;
 import rip.skyland.ranks.ranks.RankModule;
 
@@ -20,7 +21,7 @@ public class RankDeleteProcedure extends ChatProcedure {
     public void start() {
         super.start();
 
-        player.sendMessage(ChatColor.AQUA + "Please select the name of the rank you want to delete.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Please select the name of the rank you want to delete.");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class RankDeleteProcedure extends ChatProcedure {
         final Rank rank = rankModule.findRank(result);
 
         if(rank == null) {
-            player.sendMessage(ChatColor.WHITE + "No rank with that name found!");
+            player.sendMessage(ChatColor.RED + "No rank with that name found!");
             return;
         }
 

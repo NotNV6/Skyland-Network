@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.procedure.ChatProcedure;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.plugin.plugin.PluginModule;
 
 public class PluginSelectProcedure extends ChatProcedure {
@@ -22,7 +23,7 @@ public class PluginSelectProcedure extends ChatProcedure {
     public void start() {
         super.start();
 
-        player.sendMessage(ChatColor.AQUA + "Select the plugin you want to disable or enable.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "Select the plugin you want to disable or enable.");
     }
 
     @Override
@@ -42,7 +43,7 @@ public class PluginSelectProcedure extends ChatProcedure {
             pluginModule.enablePlugin(plugin);
         }
 
-        player.sendMessage(ChatColor.AQUA + "You have " + (plugin.isEnabled() ? "enabled" : "disabled") + " the " + ChatColor.WHITE + plugin.getName() + ChatColor.AQUA + " plugin.");
+        player.sendMessage(Locale.PRIMARY_COLOR + "You have " + (plugin.isEnabled() ? "enabled" : "disabled") + " the " + Locale.SECONDARY_COLOR + plugin.getName() + Locale.PRIMARY_COLOR + " plugin.");
         super.finish(result);
     }
 }
