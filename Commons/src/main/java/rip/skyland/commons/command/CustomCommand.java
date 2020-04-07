@@ -82,7 +82,6 @@ public class CustomCommand extends Command {
                     sender.sendMessage(ChatColor.RED + "Usage: /" + label + " " + Arrays.stream(parameters).map(parameter1 -> "<" + parameter1.getName() + ">").collect(Collectors.joining(" ")));
                     return true;
                 } else if (param != null && !param.value().isEmpty()) {
-                    System.out.println("cancer");
                     final TypeAdapter<?> typeAdapter = CommandModule.getInstance().findConverter(parameter.getType());
 
                     objects[i] = typeAdapter.convert(sender, param.value());

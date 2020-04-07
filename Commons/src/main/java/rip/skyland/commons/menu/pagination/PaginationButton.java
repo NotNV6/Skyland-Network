@@ -10,13 +10,20 @@ import java.util.Objects;
 
 public class PaginationButton extends Button {
 
+    /**
+     * Constructor for creating a new PaginatedButton
+     *
+     * @param displayName the name
+     * @param menu what menu it's supposed to be in
+     * @param next whether it's next or previous page.
+     */
     public PaginationButton(String displayName, PaginatedMenu menu, boolean next) {
         super(next ? 8 : 0, Material.CARPET, displayName, Collections.emptyList(), 0, player -> {
-            if(next && menu.getCurrentPage() < Objects.requireNonNull(menu.getPaginatedButtons().stream().sorted(Comparator.comparingInt(Button::getIndex)).reduce((first, second) -> second).orElse(null)).getIndex()) {
-                menu.setCurrentPage(menu.getCurrentPage()+1);
+            if (next && menu.getCurrentPage() < Objects.requireNonNull(menu.getPaginatedButtons().stream().sorted(Comparator.comparingInt(Button::getIndex)).reduce((first, second) -> second).orElse(null)).getIndex()) {
+                menu.setCurrentPage(menu.getCurrentPage() + 1);
                 player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
-            } else if(!next && menu.getCurrentPage() > 1) {
-                menu.setCurrentPage(menu.getCurrentPage()-1);
+            } else if (!next && menu.getCurrentPage() > 1) {
+                menu.setCurrentPage(menu.getCurrentPage() - 1);
                 player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
             } else {
                 player.playSound(player.getLocation(), Sound.DIG_GRASS, 1F, 1F);

@@ -36,7 +36,6 @@ public class ButtonListener implements Listener {
 
         if (menu != null) {
             menu.onClose();
-            menuHandler.destroyMenu(menu);
         }
     }
 }

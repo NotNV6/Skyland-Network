@@ -1,7 +1,6 @@
 package rip.skyland.ranks.grants;
 
 import com.google.gson.JsonObject;
-import jdk.internal.jline.internal.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import rip.skyland.commons.CommonsPlugin;
@@ -18,7 +17,6 @@ public class Grant extends SimpleJsonSerialization {
 
     private final Rank rank;
 
-    @Nullable
     private final UUID issuerUuid;
 
     private String server = "Not specified";
@@ -36,7 +34,7 @@ public class Grant extends SimpleJsonSerialization {
      * @param rank       the rank
      * @param issuerUuid the issuer
      */
-    public Grant(final Rank rank, final @Nullable UUID issuerUuid) {
+    public Grant(final Rank rank, final UUID issuerUuid) {
         super(null);
 
         this.startTime = System.currentTimeMillis();

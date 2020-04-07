@@ -1,7 +1,6 @@
 package rip.skyland.ranks.ranks;
 
 import com.google.gson.JsonObject;
-import jdk.internal.jline.internal.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.ChatColor;

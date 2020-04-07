@@ -25,6 +25,11 @@ public abstract class PaginatedMenu extends Menu {
 
     private List<Button> navigationButtons;
 
+    /**
+     * Constructor for creating a new instance of the PaginatedMenu
+     *
+     * @param player the player
+     */
     public PaginatedMenu(Player player) {
         super(player);
         this.player = player;
@@ -53,7 +58,7 @@ public abstract class PaginatedMenu extends Menu {
         final Inventory inventory = Bukkit.createInventory(null, paginatedSize(), CC.translate(getTitle()));
         final MenuHandler menuHandler = CommonsPlugin.getInstance().getHandler().findModule(MenuHandler.class);
 
-        menuHandler.destroyMenu(this);
+        this.onClose();
         player.closeInventory();
 
         navigationButtons.forEach(button -> inventory.setItem(button.getIndex(), button.getItem()));
@@ -66,5 +71,4 @@ public abstract class PaginatedMenu extends Menu {
         menuHandler.getMenus().add(this);
         player.openInventory(inventory);
     }
-
 }

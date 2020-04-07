@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.menu.button.Button;
 import rip.skyland.commons.util.CC;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public abstract class Menu {
 
     private final Player player;
+    private final MenuHandler menuHandler = CommonsPlugin.getInstance().getHandler().findModule(MenuHandler.class);
 
     public Menu(Player player) {
         this.player = player;
@@ -36,7 +38,9 @@ public abstract class Menu {
     /**
      * Called upon menu close
      */
-    public abstract void onClose();
+    public void onClose() {
+        menuHandler.getMenus().remove(this);
+    }
 
     /**
      * Get the size of the menu
@@ -46,9 +50,11 @@ public abstract class Menu {
     public abstract int size();
 
     public void openMenu() {
-        Inventory inventory = Bukkit.createInventory(null, size(), CC.translate(getTitle()));
+        final Inventory inventory = Bukkit.createInventory(null, size(), CC.translate(getTitle()));
 
         this.getButtons().forEach(button -> inventory.setItem(button.getIndex(), button.getItem()));
+        this.menuHandler.getMenus().add(this);
+
         player.openInventory(inventory);
     }
 }

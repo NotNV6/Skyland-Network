@@ -48,6 +48,7 @@ public class DefaultChatFormat implements ChatFormat {
      *
      * @param formatAddition the addition
      */
+    @Override
     public DefaultChatFormat add(FormatAddition formatAddition) {
         this.formatAdditions.add(formatAddition);
 
@@ -60,6 +61,7 @@ public class DefaultChatFormat implements ChatFormat {
      * @param addition the addition
      * @param position the position of the addition
      */
+    @Override
     public DefaultChatFormat add(String addition, FormatAddition.AdditionPosition position) {
         this.add(new FormatAddition(addition, position));
 
@@ -72,7 +74,7 @@ public class DefaultChatFormat implements ChatFormat {
      * @param position the position
      * @return the format additions.
      */
-    public List<FormatAddition> findFormatAdditions(FormatAddition.AdditionPosition position) {
+    private List<FormatAddition> findFormatAdditions(FormatAddition.AdditionPosition position) {
         return formatAdditions.stream()
                 .filter(addition -> addition.getPosition().equals(position))
                 .collect(Collectors.toList());

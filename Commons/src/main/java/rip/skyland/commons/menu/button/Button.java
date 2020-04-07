@@ -14,17 +14,30 @@ import java.util.function.Consumer;
 @Getter
 public class Button {
 
-    private Material type;
+    private final Material type;
     private ItemStack item;
-    private int index;
-    private String displayName;
-    private List<String> lore;
-    private byte durability;
-    private Consumer<Player> click;
+
+    private final int index;
+    private final byte durability;
+
+    private final String displayName;
+
+    private final List<String> lore;
+    private final Consumer<Player> click;
 
     @Setter
     private boolean added;
 
+    /**
+     * Constructor for creating a new Button
+     *
+     * @param index the index
+     * @param type the material type
+     * @param displayName the name
+     * @param lore the lore
+     * @param durability the durability/item code
+     * @param click click action
+     */
     public Button(int index, Material type, String displayName, List<String> lore, int durability, Consumer<Player> click) {
         this.index = index;
         this.displayName = displayName;
@@ -45,5 +58,4 @@ public class Button {
 
         return this;
     }
-
 }
