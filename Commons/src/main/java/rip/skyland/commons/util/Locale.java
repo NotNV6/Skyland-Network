@@ -2,6 +2,7 @@ package rip.skyland.commons.util;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
+import rip.skyland.commons.CommonsPlugin;
 
 @UtilityClass
 public class Locale {
@@ -14,5 +15,8 @@ public class Locale {
 
     /** the tertiary color for the network */
     public final ChatColor TERTIARY_COLOR = ChatColor.DARK_AQUA;
+
+    /** the name of the server */
+    public final String SERVER_NAME = CommonsPlugin.getInstance().getConfig().getString("server.name");
 
 }
