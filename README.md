@@ -12,12 +12,6 @@ We use a maven modular system for our network.
 # [Ranks](https://github.com/NotNV6/Skyland-Netowrk/tree/master/Ranks)
 General plugin for ranks/grants. 
 
-- Todo:
-  -
-  * Improve grammar in messages/menus.
-  * Add list command
-  * Recode data classes.
-
 - Features:
   - 
   * Temporary grants (untested as of M06 AP 22 PM)
@@ -28,10 +22,6 @@ General plugin for ranks/grants.
 # [PluginHandler](https://github.com/NotNV6/Skyland-Netowrk/tree/master/PluginHandler)
 Plugin for enabling/disabling plugins
 
-- Todo:
-  -
-  * Nothing as of now.
- 
 * Features:
   -
   * Disabling (soft) dependent plugins
@@ -39,10 +29,6 @@ Plugin for enabling/disabling plugins
   
 # [Commons](https://github.com/NotNV6/Skyland-Network/tree/master/Commons)
 General library for all plugins.
-
-- Todo:
-  -
-  * Nothing as of now.
 
 - Features:
   -

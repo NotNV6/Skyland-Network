@@ -19,7 +19,7 @@ public class GrantCommand {
         new GrantMenu(player, target).openMenu();
     }
 
-    @Subcommand(parentLabel="grant", label="console", permission="admin")
+    @Subcommand(parentLabel = "grant", label = "console", permission = "admin")
     public void execute(CommandSender sender, PlayerData target, Rank rank) {
         if (rank.isDefaultRank()) {
             sender.sendMessage(ChatColor.RED + "Please provide a valid rank.");
@@ -28,5 +28,4 @@ public class GrantCommand {
 
         target.findData(GrantData.class).addGrant(new Grant(rank, null));
     }
-
 }
