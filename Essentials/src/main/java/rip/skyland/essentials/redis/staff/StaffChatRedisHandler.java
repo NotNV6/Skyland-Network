@@ -2,6 +2,7 @@ package rip.skyland.essentials.redis.staff;
 
 import com.google.gson.JsonObject;
 import org.bukkit.ChatColor;
+import rip.skyland.commons.util.Locale;
 import rip.skyland.essentials.redis.StaffRedisHandler;
 
 public class StaffChatRedisHandler extends StaffRedisHandler {
@@ -12,7 +13,7 @@ public class StaffChatRedisHandler extends StaffRedisHandler {
         final String serverName = object.get("serverName").getAsString();
         final String message = object.get("message").getAsString();
 
-        this.broadcastMessage(ChatColor.GRAY + "[" + serverName + "] " + ChatColor.AQUA + playerName + ": " + ChatColor.WHITE + message);
+        this.broadcastMessage(ChatColor.GRAY + "[" + serverName + "] " + Locale.PRIMARY_COLOR + playerName + ": " + Locale.SECONDARY_COLOR + message);
     }
 
     @Override

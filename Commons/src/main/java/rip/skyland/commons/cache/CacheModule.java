@@ -1,19 +1,26 @@
 package rip.skyland.commons.cache;
 
-import lombok.Data;
 import rip.skyland.commons.module.Module;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 public class CacheModule extends Module {
 
-    private List<Cache<?>> cacheList = new ArrayList<>();
+    private final List<Cache<?>> cacheList = new ArrayList<>();
 
     @Override
     public void enable() {
         super.enable();
+    }
+
+    /**
+     * Add a cache to the cache list
+     *
+     * @param cache the cache
+     */
+    public void addCache(Cache<?> cache) {
+        this.cacheList.add(cache);
     }
 
     /**

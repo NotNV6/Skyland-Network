@@ -19,4 +19,7 @@ public class Locale {
     /** the name of the server */
     public final String SERVER_NAME = CommonsPlugin.getInstance().getConfig().getString("server.name");
 
+    /** timeout for logout timer in ticks */
+    public final int LOGOUT_TIMEOUT = 10;
+
 }
