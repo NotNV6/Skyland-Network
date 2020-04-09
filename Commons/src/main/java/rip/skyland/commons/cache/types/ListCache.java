@@ -27,4 +27,11 @@ public interface ListCache<T> extends Cache<T> {
         this.getCache().add(element);
     }
 
+    /**
+     * Remove an element from the cache
+     *
+     * @param element the element
+     */
+    default void remove(T element) { this.getCache().remove(element); }
+
 }

@@ -14,6 +14,18 @@ public interface MapCache<K, T> extends Cache<T> {
      * @param key the key
      * @return the value
      */
-    T findValue(K key);
+    default T findValue(K key) {
+        return this.getCache().get(key);
+    }
+
+    /**
+     * Add an element to the cache
+     *
+     * @param key the key/path
+     * @param value the value
+     */
+    default void put(K key, T value) {
+        this.getCache().put(key, value);
+    }
 
 }

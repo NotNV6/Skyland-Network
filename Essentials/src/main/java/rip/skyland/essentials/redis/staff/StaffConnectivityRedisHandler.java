@@ -26,6 +26,7 @@ public class StaffConnectivityRedisHandler extends StaffRedisHandler {
 
         switch (channel) {
             case "staff-join": {
+                cache.add(playerUuid);
                 this.broadcastMessage(Locale.PRIMARY_COLOR + "[Staff] " + Locale.SECONDARY_COLOR + playerName + Locale.PRIMARY_COLOR + " has joined " + Locale.SECONDARY_COLOR + serverName);
             } break;
 

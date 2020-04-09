@@ -4,7 +4,6 @@ import com.mongodb.Block;
 import lombok.EqualsAndHashCode;
 import org.bson.Document;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.module.Module;
 import rip.skyland.commons.mongo.MongoAPI;
@@ -12,10 +11,8 @@ import rip.skyland.commons.player.data.Data;
 import rip.skyland.commons.util.MethodUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 @EqualsAndHashCode(callSuper = true)
 @lombok.Data

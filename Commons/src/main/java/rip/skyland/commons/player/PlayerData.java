@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.mongo.MongoAPI;
 import rip.skyland.commons.player.data.Data;
+import rip.skyland.commons.player.data.impl.SavableData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,9 @@ import java.util.stream.Collectors;
 public class PlayerData {
 
     private String name = "";
+
     private boolean newProfile;
+    private boolean canDestroyBlocks;
 
     private final UUID uuid;
 
@@ -34,28 +37,38 @@ public class PlayerData {
     /**
      * Constructor for creating a new Profile instance.
      *
-     * @param uuid          the uuid of the owner
+     * @param uuid the uuid of the owner
      */
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
         this.newProfile = true;
 
-        if(this.getPlayer() != null) {
+        if (this.getPlayer() != null) {
             this.name = this.getPlayer().getName();
         }
 
         playerDataModule.getPlayerData().add(this);
     }
 
+    /**
+     * Constructor for creating a new instance of a PlayerData class
+     * This constructor loads the player data from a bson Document
+     *
+     * @param document the bson Document
+     */
     public PlayerData(Document document) {
         this(UUID.fromString(document.getString("uuid")));
 
         this.newProfile = false;
         this.name = document.getString("name").replace(" ", "");
 
+        final List<SavableData> savableData = playerDataModule.getRegisteredData().stream()
+                .filter(data -> data instanceof SavableData)
+                .map(SavableData.class::cast).collect(Collectors.toList());
+
         document.entrySet().stream()
-                .filter(entry -> playerDataModule.getRegisteredData().stream().anyMatch(data -> data.getSavePath().equals(entry.getKey())))
-                .forEach(entry -> this.data.add(playerDataModule.getRegisteredData().stream()
+                .filter(entry -> savableData.stream().anyMatch(data -> data.getSavePath().equals(entry.getKey())))
+                .forEach(entry -> this.data.add(savableData.stream()
                         .filter(data -> data.getSavePath().equals(entry.getKey()))
                         .findFirst().get().fromJson(parser.parse(entry.getValue().toString()).getAsJsonObject())));
     }
@@ -110,7 +123,10 @@ public class PlayerData {
             document.put("uuid", uuid.toString());
             document.put("name", name);
 
-            data.forEach(data -> document.put(data.getSavePath(), data.toJson().toString()));
+            data.stream()
+                    .filter(data1 -> data1 instanceof SavableData)
+                    .map(SavableData.class::cast)
+                    .forEach(data -> document.put(data.getSavePath(), data.toJson().toString()));
 
             collection.replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
         }

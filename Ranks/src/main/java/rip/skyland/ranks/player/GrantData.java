@@ -3,11 +3,10 @@ package rip.skyland.ranks.player;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import lombok.EqualsAndHashCode;
-import org.bukkit.entity.Player;
 import rip.skyland.commons.CommonsPlugin;
 import rip.skyland.commons.mongo.MongoAPI;
 import rip.skyland.commons.player.PlayerData;
-import rip.skyland.commons.player.data.Data;
+import rip.skyland.commons.player.data.impl.SavableData;
 import rip.skyland.commons.util.MethodUtil;
 import rip.skyland.commons.util.json.JsonBuilder;
 import rip.skyland.ranks.grants.Grant;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = true)
 @lombok.Data
-public class GrantData extends Data {
+public class GrantData extends SavableData {
 
     private final List<Grant> grants = new ArrayList<>();
     private final PlayerData playerData;
@@ -102,7 +101,7 @@ public class GrantData extends Data {
     }
 
     @Override
-    public Data fromJson(JsonObject object) {
+    public SavableData fromJson(JsonObject object) {
         final JsonArray array = MongoAPI.get().getParser().parse(object.get("grants").getAsString()).getAsJsonArray();
 
         array.forEach(element -> grants.add(new Grant(element.getAsJsonObject())));

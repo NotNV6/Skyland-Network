@@ -36,7 +36,7 @@ public class ConnectivityListener implements Listener {
                 if (!cache.contains(player.getUniqueId())) {
                     RedisAPI.get().write("staff-leave", this.getObject(player));
                 }
-            }, Locale.LOGOUT_TIMEOUT);
+            }, Locale.LOGOUT_TIMEOUT-1);
         }
     }
 

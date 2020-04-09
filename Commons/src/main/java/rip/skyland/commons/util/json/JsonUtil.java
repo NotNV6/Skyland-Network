@@ -3,6 +3,7 @@ package rip.skyland.commons.util.json;
 import com.google.gson.JsonObject;
 import lombok.experimental.UtilityClass;
 import org.bson.Document;
+import org.bukkit.inventory.ItemStack;
 import rip.skyland.commons.mongo.MongoAPI;
 
 @UtilityClass
