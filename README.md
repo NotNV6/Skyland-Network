@@ -1,6 +1,14 @@
 # Skyland Network 
 This is the main repository for the Skyland Network.
 
+# Developer Rules/Guide
+* We use finals whenever possible (not required for parameters)
+* Document your functions/methods and constructors.
+* Put all utility classes inside of the main [Commons](https://github.com/NotNV6/Skyland-Network/tree/master/Commons) plugin.
+* Use proper commit messages
+  * Use proper [emoji conventions](https://gist.github.com/parmentf/035de27d6ed1dce0b36a)
+  * Add a brief description of what you changed, example: "added KoTH base structure"
+
 # Modules
 We use a maven modular system for our network.
 
