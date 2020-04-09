@@ -21,5 +21,4 @@ public class PlayerUtil {
                 .filter(player -> player.hasPermission(permission))
                 .collect(Collectors.toList());
     }
-
 }

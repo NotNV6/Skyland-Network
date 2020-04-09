@@ -18,6 +18,6 @@ public class StaffChatRedisHandler extends StaffRedisHandler {
 
     @Override
     public String[] getChannels() {
-        return new String[] { "staff-chat" };
+        return new String[]{"staff-chat"};
     }
 }

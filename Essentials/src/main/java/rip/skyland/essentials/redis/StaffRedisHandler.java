@@ -1,6 +1,5 @@
 package rip.skyland.essentials.redis;
 
-import org.bukkit.Bukkit;
 import rip.skyland.commons.redis.handler.RedisHandler;
 import rip.skyland.commons.util.CC;
 import rip.skyland.commons.util.PlayerUtil;

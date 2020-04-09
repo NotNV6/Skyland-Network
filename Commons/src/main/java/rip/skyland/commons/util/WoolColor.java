@@ -6,6 +6,12 @@ import org.bukkit.ChatColor;
 @UtilityClass
 public class WoolColor {
 
+    /**
+     * Convert a ChatColor to a color byte
+     *
+     * @param color the color
+     * @return the byte
+     */
     public byte getWoolColor(ChatColor color) {
         switch(color) {
             case GOLD:

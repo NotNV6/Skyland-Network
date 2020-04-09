@@ -31,6 +31,11 @@ public class CommandModule extends Module {
     private final List<TypeAdapter<?>> typeAdapters = new ArrayList<>();
     private final List<CommandData> commands = new ArrayList<>();
 
+    /**
+     * Create a new instance of the CommandModule class
+     *
+     * @param fallbackPrefix the fallback prefix
+     */
     public CommandModule(String fallbackPrefix) {
         instance = this;
 
@@ -38,6 +43,11 @@ public class CommandModule extends Module {
         this.typeAdapters.addAll(Arrays.asList(new UUIDTypeAdapter(), new LongTypeAdapter(), new IntegerTypeAdapter(), new PlayerDataTypeAdapter(), new PlayerDataTypeAdapter()));
     }
 
+    /**
+     * Register commands
+     *
+     * @param objects the commands
+     */
     public void registerCommand(Object... objects) {
         Arrays.stream(objects).forEach(object -> {
             final List<Method> parentCommandMethods = Arrays.stream(object.getClass().getMethods())
@@ -69,6 +79,13 @@ public class CommandModule extends Module {
         });
     }
 
+    /**
+     * Find a converter by a class type
+     *
+     * @param type the type
+     * @param <T> the return type
+     * @return the found type adapter
+     */
     @SuppressWarnings("unchecked")
     public <T> TypeAdapter<T> findConverter(Class<T> type) {
         return (TypeAdapter<T>) this.typeAdapters.stream()

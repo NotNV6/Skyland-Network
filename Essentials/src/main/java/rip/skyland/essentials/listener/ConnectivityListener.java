@@ -36,7 +36,7 @@ public class ConnectivityListener implements Listener {
                 if (!cache.contains(player.getUniqueId())) {
                     RedisAPI.get().write("staff-leave", this.getObject(player));
                 }
-            }, Locale.LOGOUT_TIMEOUT-1);
+            }, Locale.LOGOUT_TIMEOUT - 1);
         }
     }
 
@@ -46,5 +46,4 @@ public class ConnectivityListener implements Listener {
                 .addProperty("serverName", Locale.SERVER_NAME)
                 .addProperty("playerUuid", player.getUniqueId().toString()).get();
     }
-
 }

@@ -8,10 +8,23 @@ import java.util.concurrent.TimeUnit;
 @UtilityClass
 public class TimeUtils {
 
+    /**
+     * Format an epoch time in words
+     *
+     * @param time the epoch time
+     * @return the formatted time in words
+     */
     public String formatWords(long time) {
         return DurationFormatUtils.formatDurationWords(time, true, true);
     }
 
+    /**
+     * Format an epoch time in words
+     *
+     * @param time the time
+     * @param includeSeconds whether it should include the time in seconds
+     * @return the formatted time in words
+     */
     public String formatWordsMin(long time, boolean includeSeconds) {
         final long years = TimeUnit.MILLISECONDS.toDays(time) / 365;
         final long months = (TimeUnit.MILLISECONDS.toDays(time) / 12) - (years * 12);
@@ -53,12 +66,24 @@ public class TimeUtils {
         return builder.toString();
     }
 
+    /**
+     * Check whether there should be a comma
+     *
+     * @param l the time
+     * @param builder the StringBuilder
+     */
     private void checkComma(long l, StringBuilder builder) {
         if (l != 0) {
             builder.append(", ");
         }
     }
 
+    /**
+     * Format a String
+     *
+     * @param input the input to get formatted
+     * @return the formatted string
+     */
     public long format(String input) {
         if (input == null || input.isEmpty()) {
             return -1L;
@@ -83,6 +108,13 @@ public class TimeUtils {
         return result;
     }
 
+    /**
+     * Convert a char to a time value
+     *
+     * @param value the value
+     * @param unit the unit
+     * @return the converted time
+     */
     private long convert(int value, char unit) {
         switch (unit) {
             case 'y' | 'Y':

@@ -39,21 +39,40 @@ public abstract class PaginatedMenu extends Menu {
                 new PaginationButton("&7Next Page", this, true));
     }
 
+    /**
+     * The size of the paginated menu
+     * This is the menu size + 9
+     *
+     * @return the size
+     */
     public int paginatedSize() {
         return size() + 9;
     }
 
+    /**
+     * Get the buttons of the menu
+     *
+     * @return the button list
+     */
     public List<Button> getPaginatedButtons() {
         List<Button> buttons = new ArrayList<>();
+
         this.getButtons().forEach(button -> buttons.add(new Button(button.getIndex() + 9, button.getType(), button.getDisplayName(), button.getLore(), button.getDurability(), button.getClick())));
         buttons.addAll(navigationButtons);
+
         return buttons;
     }
 
+    /**
+     * Open the menu
+     */
     public void openMenu() {
         this.updatePage();
     }
 
+    /**
+     * Update the menu
+     */
     public void updatePage() {
         final Inventory inventory = Bukkit.createInventory(null, paginatedSize(), CC.translate(getTitle()));
         final MenuHandler menuHandler = CommonsPlugin.getInstance().getHandler().findModule(MenuHandler.class);

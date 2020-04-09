@@ -30,159 +30,237 @@ import java.util.function.Consumer;
  */
 public class ItemBuilder implements Cloneable {
 
-    private ItemStack is;
+    private final ItemStack itemStack;
 
-    public ItemBuilder(Material m) {
-        this(m, 1);
+    /**
+     * Constructor for creating a new ItemBuilder with only the Material type
+     *
+     * @param material the material type
+     */
+    public ItemBuilder(Material material) {
+        this(material, 1);
     }
 
-    public ItemBuilder(ItemStack is) {
-        this.is = is;
+    /**
+     * Constructor for creating a new ItemBuilder instantly with an ItemStack
+     *
+     * @param itemStack the item stack
+     */
+    public ItemBuilder(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 
-    public ItemBuilder(Material m, int amount) {
-        is = new ItemStack(m, amount);
+    /**
+     * Constructor for creating a new ItemBuilder with the amount and Material type
+     *
+     * @param material the material type
+     * @param amount the amount
+     */
+    public ItemBuilder(Material material, int amount) {
+        itemStack = new ItemStack(material, amount);
     }
 
-    public ItemBuilder(Material m, int amount, byte durability) {
-        is = new ItemStack(m, amount, durability);
+    /**
+     * Constructor for creating a new ItemBuilder with the amount, material type and durability byte.
+     *
+     * @param material the material type
+     * @param amount the amount
+     * @param durability the durability byte
+     */
+    public ItemBuilder(Material material, int amount, byte durability) {
+        itemStack = new ItemStack(material, amount, durability);
     }
 
+    /**
+     * Set the durability value of the ItemStack
+     *
+     * @param dur the durability value
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setDurability(short dur) {
-        is.setDurability(dur);
-        is.setData(new MaterialData(69));
+        itemStack.setDurability(dur);
+        itemStack.setData(new MaterialData(69));
         return this;
     }
 
+    /**
+     * Set the MaterialData value of the ItemStack
+     *
+     * @param data the bytes of the data
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setData(byte data) {
-        is.setData(new MaterialData(this.is.getType().ordinal(), data));
+        itemStack.setData(new MaterialData(this.itemStack.getType().ordinal(), data));
 
         return this;
     }
 
+    /**
+     * Set the name of the ItemStack
+     *
+     * @param name the name
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setName(String name) {
-        ItemMeta im = is.getItemMeta();
+        ItemMeta im = itemStack.getItemMeta();
+
         im.setDisplayName(CC.translate(name));
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
+
         return this;
     }
 
+    /**
+     * Add an unsafe enchantment to the ItemStack
+     *
+     * @param ench the enchantment
+     * @param level the level of the enchantment
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder addUnsafeEnchantment(Enchantment ench, int level) {
-        is.addUnsafeEnchantment(ench, level);
+        itemStack.addUnsafeEnchantment(ench, level);
         return this;
     }
 
+    /**
+     * Remove an enchantment from the ItemBuilder
+     *
+     * @param ench the enchantment to remove
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder removeEnchantment(Enchantment ench) {
-        is.removeEnchantment(ench);
+        itemStack.removeEnchantment(ench);
         return this;
     }
 
+    /**
+     * Set the SkullOwner data of the material
+     * This only works if the item type is a SKULL_ITEM
+     *
+     * @param owner the name of the owner
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setSkullOwner(String owner) {
-        SkullMeta im = (SkullMeta) is.getItemMeta();
+        SkullMeta im = (SkullMeta) itemStack.getItemMeta();
         im.setOwner(owner);
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
 
         return this;
     }
 
+    /**
+     * Add a normal enchantment to the ItemStack
+     *
+     * @param ench the enchantment
+     * @param level the level of the enchantment
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder addEnchant(Enchantment ench, int level) {
-        ItemMeta im = is.getItemMeta();
+        ItemMeta im = itemStack.getItemMeta();
         im.addEnchant(ench, level, true);
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
         return this;
     }
 
-    public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
-        is.addEnchantments(enchantments);
-        return this;
-    }
-
+    /**
+     * Make the item unbreakable
+     *
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setInfinityDurability() {
-        is.setDurability(Short.MAX_VALUE);
+        itemStack.setDurability(Short.MAX_VALUE);
         return this;
     }
 
+    /**
+     * Set the lore of the ItemMeta
+     *
+     * @param lore the lore
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setLore(String... lore) {
-        ItemMeta im = is.getItemMeta();
+        ItemMeta im = itemStack.getItemMeta();
+
         im.setLore(Arrays.asList(lore));
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
+
         return this;
     }
 
+    /**
+     * Set the lore of the ItemMeta
+     *
+     * @param lore the lore
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setLore(List<String> lore) {
-        ItemMeta im = is.getItemMeta();
+        ItemMeta im = itemStack.getItemMeta();
+
         im.setLore(CC.translate(lore));
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
+
         return this;
     }
 
-    public ItemBuilder removeLoreLine(String line) {
-        ItemMeta im = is.getItemMeta();
-        List<String> lore = new ArrayList<>(im.getLore());
-        if (!lore.contains(line)) return this;
-        lore.remove(line);
-        im.setLore(lore);
-        is.setItemMeta(im);
-        return this;
-    }
 
-    public ItemBuilder removeLoreLine(int index) {
-        ItemMeta im = is.getItemMeta();
-        List<String> lore = new ArrayList<>(im.getLore());
-        if (index < 0 || index > lore.size()) return this;
-        lore.remove(index);
-        im.setLore(lore);
-        is.setItemMeta(im);
-        return this;
-    }
-
-    public ItemBuilder addLoreLine(String line) {
-        ItemMeta im = is.getItemMeta();
-        List<String> lore = new ArrayList<>();
-        if (im.hasLore()) lore = new ArrayList<>(im.getLore());
-        lore.add(line);
-        im.setLore(lore);
-        is.setItemMeta(im);
-        return this;
-    }
-
-    public ItemBuilder addLoreLine(String line, int pos) {
-        ItemMeta im = is.getItemMeta();
-        List<String> lore = new ArrayList<>(im.getLore());
-        lore.set(pos, line);
-        im.setLore(lore);
-        is.setItemMeta(im);
-        return this;
-    }
-
+    /**
+     * Set the color of the material
+     * Only works if the Material is a INK_SACK
+     *
+     * @param color the color
+     * @return the current ItemBuilder instance
+     */
     @SuppressWarnings("deprecation")
     public ItemBuilder setDyeColor(DyeColor color) {
-        this.is.setDurability(color.getData());
+        this.itemStack.setDurability(color.getData());
         return this;
     }
 
+    /**
+     * Set the color of the material
+     * Only works if the material is WOOL
+     *
+     * @param color the color
+     * @return the current ItemBuilder instance
+     */
     @Deprecated
     public ItemBuilder setWoolColor(DyeColor color) {
-        if (!is.getType().equals(Material.WOOL)) return this;
-        this.is.setDurability(color.getData());
+        if (!itemStack.getType().equals(Material.WOOL)) {
+            return this;
+        }
+
+        this.itemStack.setDurability(color.getData());
+
         return this;
     }
 
-
+    /**
+     * Set the color of the material
+     * Only works if the material is LEATHER_HELMET, LEATHER_CHESTPLATE, LEATHER_LEGGINGS or LEATHER_BOOTS
+     *
+     * @param color the color
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setLeatherArmorColor(Color color) {
-        LeatherArmorMeta im = (LeatherArmorMeta) is.getItemMeta();
+        LeatherArmorMeta im = (LeatherArmorMeta) itemStack.getItemMeta();
         im.setColor(color);
-        is.setItemMeta(im);
+        itemStack.setItemMeta(im);
         return this;
     }
 
+    /**
+     * Set the click action of the Item
+     *
+     * @param action the click action
+     * @return the current ItemBuilder instance
+     */
     public ItemBuilder setAction(Consumer<Player> action) {
         if(action != null) {
             Bukkit.getPluginManager().registerEvents(new Listener() {
                 @EventHandler
                 public void onClick(PlayerInteractEvent event) {
                     ItemStack item = event.getItem();
-                    if (item != null && item.equals(toItemStack())) {
+                    if (event.hasItem() && item.equals(toItemStack())) {
                         action.accept(event.getPlayer());
                         event.setCancelled(true);
                     }
@@ -194,6 +272,6 @@ public class ItemBuilder implements Cloneable {
     }
 
     public ItemStack toItemStack() {
-        return is;
+        return itemStack;
     }
 }

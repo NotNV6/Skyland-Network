@@ -20,7 +20,7 @@ public class StaffConnectivityRedisHandler extends StaffRedisHandler {
         final UUID playerUuid = UUID.fromString("playerUuid");
         final LeaveCache cache = CommonsPlugin.getInstance().getHandler().findModule(CacheModule.class).findCache(LeaveCache.class);
 
-        if(cache.contains(playerUuid)) {
+        if (cache.contains(playerUuid)) {
             channel = "staff-swap-server";
         }
 
@@ -28,15 +28,18 @@ public class StaffConnectivityRedisHandler extends StaffRedisHandler {
             case "staff-join": {
                 cache.add(playerUuid);
                 this.broadcastMessage(Locale.PRIMARY_COLOR + "[Staff] " + Locale.SECONDARY_COLOR + playerName + Locale.PRIMARY_COLOR + " has joined " + Locale.SECONDARY_COLOR + serverName);
-            } break;
+            }
+            break;
 
             case "staff-leave": {
                 this.broadcastMessage(Locale.PRIMARY_COLOR + "[Staff] " + Locale.SECONDARY_COLOR + playerName + Locale.PRIMARY_COLOR + " has left the netork.");
-            } break;
+            }
+            break;
 
             case "staff-swap-server": {
                 this.broadcastMessage(Locale.PRIMARY_COLOR + "[Staff] " + Locale.SECONDARY_COLOR + playerName + Locale.PRIMARY_COLOR + " has switched servers " + Locale.SECONDARY_COLOR + "(to " + serverName + ")");
-            } break;
+            }
+            break;
         }
     }
 
