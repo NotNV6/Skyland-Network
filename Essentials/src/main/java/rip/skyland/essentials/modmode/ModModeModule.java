@@ -24,7 +24,7 @@ public class ModModeModule extends Module {
             null,
             null,
             null,
-            new ItemBuilder(Material.INK_SACK).setDurability((short) 3).setName(ChatColor.GOLD + "Visibility").toItemStack()
+            new ItemBuilder(Material.INK_SACK).setData((byte) 69).setDurability((short) 3).setName(ChatColor.GOLD + "Visibility").toItemStack()
     };
 
     @Override
@@ -47,6 +47,7 @@ public class ModModeModule extends Module {
             data.setCachedPlayerData(new CachedPlayerData(player));
             data.setCanDestroyBlocks(player.hasPermission("admin"));
             data.setModModeEnabled(true);
+            data.vanishPlayer(player);
 
             player.setGameMode(GameMode.CREATIVE);
             player.getInventory().setArmorContents(new ItemStack[]{null});
@@ -72,6 +73,7 @@ public class ModModeModule extends Module {
             data.setModModeEnabled(false);
             data.setCanDestroyBlocks(player.hasPermission("admin"));
             data.setCachedPlayerData(null);
+            data.unvanishPlayer(player);
         }
     }
 }

@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.material.MaterialData;
 import rip.skyland.commons.CommonsPlugin;
 
 import java.util.ArrayList;
@@ -49,6 +50,13 @@ public class ItemBuilder implements Cloneable {
 
     public ItemBuilder setDurability(short dur) {
         is.setDurability(dur);
+        is.setData(new MaterialData(69));
+        return this;
+    }
+
+    public ItemBuilder setData(byte data) {
+        is.setData(new MaterialData(this.is.getType().ordinal(), data));
+
         return this;
     }
 
