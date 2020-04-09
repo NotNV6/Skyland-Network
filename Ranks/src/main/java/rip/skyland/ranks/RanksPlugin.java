@@ -32,16 +32,16 @@ public class RanksPlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        final ModuleRegistrar moduleRegistrar = CommonsPlugin.getInstance().getHandler();
-        final PlayerDataModule playerDataModule = moduleRegistrar.findModule(PlayerDataModule.class);
+        final ModuleRegistrar registrar = CommonsPlugin.getInstance().getHandler();
+        final PlayerDataModule playerDataModule = registrar.findModule(PlayerDataModule.class);
         final ChatModule chatModule = new ChatModule(new DefaultChatFormat());
 
         // register modules
-        moduleRegistrar.registerModule(new GrantModule());
-        moduleRegistrar.registerModule(new RankModule());
+        registrar.registerModule(new GrantModule());
+        registrar.registerModule(new RankModule());
 
         // chat module
-        moduleRegistrar.registerModule(chatModule);
+        registrar.registerModule(chatModule);
         chatModule.setChatHandler(new SimpleChatHandler());
 
         // register player data
@@ -51,11 +51,11 @@ public class RanksPlugin extends JavaPlugin {
         );
 
         // register listeners
-        Bukkit.getPluginManager().registerEvents(new DataRegisterListener(), this);
-        Bukkit.getPluginManager().registerEvents(new ChatHandlerListener(), this);
+        registrar.registerListener(DataRegisterListener.class);
+        registrar.registerListener(ChatHandlerListener.class);
 
         // register commands
-        final CommandModule commandModule = moduleRegistrar.findModule(CommandModule.class);
+        final CommandModule commandModule = registrar.findModule(CommandModule.class);
 
         commandModule.getTypeAdapters().add(new RankTypeAdapter());
         commandModule.registerCommand(

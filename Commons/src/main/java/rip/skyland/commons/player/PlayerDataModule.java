@@ -25,8 +25,7 @@ public class PlayerDataModule extends Module {
     public void enable() {
         super.enable();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerDataListener(), CommonsPlugin.getInstance());
-
+        CommonsPlugin.getInstance().getHandler().registerListener(new PlayerDataListener());
         MethodUtil.executeLater(this::loadProfiles, 20);
     }
 
